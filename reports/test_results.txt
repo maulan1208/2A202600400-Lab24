@@ -1,0 +1,16 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\admin\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\AI_vin\track2\L24\2A202600400-Lab24\medviet-governance
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-37.12.0, langsmith-0.8.3
+collecting ... collected 6 items
+
+tests/test_pii.py::TestPIIDetection::test_cccd_detected PASSED           [ 16%]
+tests/test_pii.py::TestPIIDetection::test_phone_detected PASSED          [ 33%]
+tests/test_pii.py::TestPIIDetection::test_email_detected PASSED          [ 50%]
+tests/test_pii.py::TestPIIDetection::test_detection_rate_above_95_percent PASSED [ 66%]
+tests/test_pii.py::TestAnonymization::test_pii_not_in_output PASSED      [ 83%]
+tests/test_pii.py::TestAnonymization::test_non_pii_columns_unchanged PASSED [100%]
+
+============================== 6 passed in 7.10s ==============================

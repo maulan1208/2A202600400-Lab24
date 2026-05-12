@@ -1,0 +1,30 @@
+#!/bin/bash
+# Pre-commit hook: chạy security checks trước khi commit
+
+echo "🔍 Running security checks..."
+
+# 1. git-secrets scan
+git secrets --pre_commit_hook -- "$@"
+if [ $? -ne 0 ]; then
+    echo "❌ git-secrets found potential secrets! Commit blocked."
+    exit 1
+fi
+
+# 2. Bandit SAST scan
+echo "🐍 Running Bandit SAST..."
+bandit -r src/ -ll -q
+if [ $? -ne 0 ]; then
+    echo "❌ Bandit found security issues! Review above."
+    exit 1
+fi
+
+# 3. pip-audit dependency check
+echo "📦 Checking dependencies for CVEs..."
+pip-audit --desc on
+if [ $? -ne 0 ]; then
+    echo "⚠️  Vulnerable dependencies found! Update before committing."
+    exit 1
+fi
+
+echo "✅ All security checks passed!"
+exit 0
